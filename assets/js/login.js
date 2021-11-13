@@ -16,7 +16,7 @@ $(function () {
     $('#btn_reg').on('click', function () {
         // 获取表单输入的数据
         var inputData = { username: $('#form_reg [name=username]').val(), password: $('#form_reg [name=password]').val() }
-        $.post('http://api-breakingnews-web.itheima.net/api/reguser', inputData, function (res) {
+        $.post('/api/reguser', inputData, function (res) {
 
             layer.msg(res.message);
             if (res.status !== 0) {
@@ -36,7 +36,7 @@ $(function () {
         console.log('监测到登录提交');
         var inputData = { username: $('#form_login [name=username]').val(), password: $('#form_login [name=password]').val() }
         console.log(inputData);
-        $.post('http://api-breakingnews-web.itheima.net/api/login', inputData, function (res) {
+        $.post('/api/login', inputData, function (res) {
 
             // layer.msg(res.message);
             if (res.status !== 0) {
