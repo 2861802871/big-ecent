@@ -8,10 +8,11 @@ $(function () {
             method: 'GET',
             url: '/my/userinfo',
             // 请求头配置对象,携带身份验证信息,已统一在$.ajaxPrefilter中设置
-            // headers: {
-            //     Authorization: localStorage.getItem('token') || ''
-            // },
+            headers: {
+                Authorization: localStorage.getItem('token') || ''
+            },
             success: function (res) {
+                console.log(res);
                 if (res.status !== 0) {
                     return layui.layer.msg('获取用户信息失败！')
                 }
