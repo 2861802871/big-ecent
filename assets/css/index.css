@@ -1,0 +1,81 @@
+.layui-footer {
+    text-align: center;
+    font-size: 12px;
+}
+
+/* 字体图标右侧留出8px间隙 */
+
+.iconfont {
+    margin-right: 8px;
+}
+
+/* layui图标 */
+
+.layui-icon {
+    margin-right: 8px;
+    margin-left: 20px;
+}
+
+/* 设置主体内容宽高 */
+
+.iframe {
+    /* width: 100%!important;
+    height: 100%!important; */
+    width: 100%;
+    height: 100%;
+    /* 加上padding后主页面滚动条会隐藏？ */
+    padding: 15px;
+}
+
+/* 隐藏主体区域滚动条 */
+
+.layui-body {
+    overflow: hidden;
+}
+
+/* 清除a标签的动画 */
+
+a {
+    /* transition: none !important; */
+}
+
+/* 侧边栏用户头像及欢迎 */
+
+.userinfo {
+    height: 60px;
+    line-height: 60px;
+    padding-left: 20px;
+    font-size: 12px;
+    user-select: none;
+}
+
+.layui-side-scroll .userinfo {
+    border-bottom: 1px solid #282b33;
+}
+
+/* 图片头像 */
+
+.layui-nav-img {
+    width: 40px;
+    height: 40px;
+    display: none;
+}
+
+/* 文字头像 */
+
+.text-avatar {
+    /* display: inline-block !important; */
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background-color: #009688;
+    border-radius: 50%;
+    line-height: 40px;
+    text-align: center;
+    margin-right: 10px;
+    font-size: 20px;
+    color: #fff;
+    position: relative;
+    top: 4px;
+    /* display: none; */
+}
