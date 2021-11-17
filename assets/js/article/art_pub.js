@@ -97,12 +97,12 @@ $(function () {
             //提交formData格式数据必须加一下两个属性
             contentType: false,
             processData: false,
-
             success: function (res) {
+                layer.msg('发表文章成功！')
                 if (res.status !== 0) {
                     return layer.msg('发表文章失败！')
                 }
-                layer.msg(res.message)
+                layer.msg('发表文章成功！')
                 location.href = '/article/art_pub.html'
             }
         })

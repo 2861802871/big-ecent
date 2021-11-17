@@ -8,7 +8,7 @@ $(function () {
     // 需要请求是将查询参数对象发送到服务器
     var q = {
         pagenum: 1,//默认请求第一页的值
-        pagesize: 2,//默认每页显示两条数据
+        pagesize: 10,//默认每页显示两条数据
         cate_id: null,//文章分类的id
         state: null,//文章的发布状态
     }
@@ -138,7 +138,7 @@ $(function () {
             limit: q.pagesize,//每页显示几条
             curr: q.pagenum,//当前要显示的页码
             layout: ['count', 'limit', 'prev', 'page', 'next', 'skip'],//配置分页结构
-            limits: [2, 3, 4, 5, 10, 20],//每页展示条目数选择数值
+            limits: [10, 2, 3, 4, 5, 20],//每页展示条目数选择数值
             // 分页切换的时候触发改函数
             jump: function (obj, first) {
                 // //obj包含了当前分页的所有参数，比如：
@@ -174,7 +174,7 @@ $(function () {
             var id = $(this).attr("data-id")
             $.ajax({
                 method: 'GET',
-                url: '/my/article/delete/' + id,
+                url: '/my/article/deletecate/' + id,
                 success: function (res) {
                     console.log(res);
                     if (res.status !== 0) {
