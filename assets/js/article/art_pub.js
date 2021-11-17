@@ -107,5 +107,9 @@ $(function () {
             }
         })
     }
+
+    // 编辑功能
+    // parent.window.windowParam1.open(C)
+
 })
 

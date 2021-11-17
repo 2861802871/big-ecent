@@ -196,4 +196,25 @@ $(function () {
             layer.close(index);
         });
     })
+
+    // 编辑文章功能
+    revise()
+    function revise() {
+        $("tbody").on('click', '.btn-revise', function () {
+            var id = $(this).attr("data-id")
+            // 根据id获取文章信息
+            $.ajax({
+                method: 'GET',
+                url: '/my/article/' + id,
+                success: function (res) {
+                    console.log(res);
+                    if (res.status !== 0) {
+                        return layer.msg('编辑失败！')
+                    }
+                    return res
+                }
+            })
+        });
+    }
+
 })
