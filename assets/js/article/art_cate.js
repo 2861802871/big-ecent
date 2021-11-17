@@ -1,5 +1,6 @@
 $(function () {
     var layer = layui.layer
+    var form = layui.form
     // 获取文章分类列表
     initArtCatelist();
     function initArtCatelist() {
@@ -7,7 +8,6 @@ $(function () {
             method: 'GET',
             url: '/my/article/cates',
             success: function (res) {
-                console.log(res);
                 var htmlStr = template('tpl-table', res)
                 $('.layui-table').html(htmlStr)
             }
@@ -26,7 +26,7 @@ $(function () {
     })
 
     // 监听分类表单提交事件,用body来代理，原因form-add在开始阶段变得没有添加到页面
-    $('body').on('submit', function (e) {
+    $('body').on('submit', '#form-add', function (e) {
         e.preventDefault()
         $.ajax({
             method: "POST",
@@ -52,10 +52,71 @@ $(function () {
         indexEdit = layer.open({
             type: 1,
             area: ['500px', '251px'],
-            title: '修改类别'
-            , content: $('#dialog-edit').html()
+            title: '修改类别',
+            content: $('#dialog-edit').html()
+        })
+        // 通过模板字符给编辑按钮新建属性data - Id存放数据id，在点击编辑按钮时获取属性data-id的值存放在id中
+        var id = $(this).attr('data-id')
+        console.log(id);
+        // 发请求获取对应Id的数据
+        $.ajax({
+            method: "GET",
+            url: '/my/article/cates/' + id,
+            success: function (res) {
+                console.log(res);
+                // res.data = {
+                //     id: 1, name: '123', alisa: '456'
+                // }
+                form.val('form-edit', res.data)
+            }
+        })
+
+        // 监听编辑表单的提交事件，同样委托给body
+        $('body').on('submit', '#form-edit', function (e) {
+            e.preventDefault()
+            $.ajax({
+                method: "POST",
+                url: '/my/article/updatecate',
+                data: $('#form-edit').serialize(),
+                // $(this).serialize()无法获取表单值/
+                success: function (res) {
+                    if (res.status !== 0) {
+                        return layer.msg('修改分类失败！')
+                    }
+                    // 更新分类
+                    initArtCatelist();
+                    layer.msg('修改分类成功！')
+                    // 关闭弹出层
+                    layer.close(indexEdit)
+                }
+            })
         })
     })
+
+    // 删除操作动态创建的标签用事件委托，委托给不是动态创建的元素
+    $("body").on('click', '.btn-delete', function () {
+        var Id = $(this).attr('data-id')
+        layer.confirm('确定删除?', { icon: 3, title: '提示' }, function (index) {
+            //do something
+            // 发起删除请求
+            $.ajax({
+                method: 'GET',
+                url: '/my/article/deletecate/' + Id,
+                success: function (res) {
+                    if (res.status !== 0) {
+                        return layer.msg('删除分类失败！')
+                    }
+                    // 更新分类
+                    initArtCatelist();
+                    layer.msg('删除分类成功！')
+                }
+            })
+            // 关闭弹出层
+            layer.close(index);
+        });
+    })
+
+
 
 
 })
